@@ -58,6 +58,7 @@ function getRandomWord() {
 
 function startGame() {
     getRandomWord()
+    $('#guessesRemaining').css("display","block");
     for (var i = 0; i < alphabet.length; i++) {
         var btn = $('<button id="btn-' + alphabet[i] + '" class="btn btn-primary" style="margin-right:5px;margin-bottom:5px; width:40px;text-align:center;" value="' + alphabet[i] + '">' + alphabet[i] + '</>');
         btn.bind('click', function() {
@@ -72,6 +73,7 @@ function startGame() {
 function fillData() {
     for (var i = 0; i < word.length; i++) {
         correctWord.push("_");
+        console.log(correctWord);
         var underscoreDiv = $('<p id="underscore' + i + '" style="display:inline; padding-right:10px; font-size:30px;">_</p>');
         $('#wordDiv').append(underscoreDiv);
     }
@@ -93,7 +95,7 @@ function userGuess(letter) {
         }
         guessedLetters.push(letter);
     }
-    if(!correctWord.includes("_")){
+    if(correctWord.indexOf("_")==-1){
         $('#guessesRemaining').html("YOU WIN!!!");
         start = false;
         $('#startDiv').css("display", "block");
